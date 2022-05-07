@@ -1,0 +1,5 @@
+# MC Deamon For Java
+
+一个对Fallen_breath的MCDReforged的Java重写。
+
+主要用于那些不能装Python的面板服，如果有条件安装Python请使用MCDReforged以防止出现奇奇怪怪的问题。
