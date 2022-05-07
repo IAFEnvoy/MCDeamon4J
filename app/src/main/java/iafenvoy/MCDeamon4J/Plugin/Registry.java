@@ -1,8 +1,7 @@
-package iafenvoy.MCDeamon4J.Registry;
+package iafenvoy.MCDeamon4J.Plugin;
 
 import java.util.HashMap;
 
-import iafenvoy.MCDeamon4J.Plugin.Plugin;
 import iafenvoy.MCDeamon4J.Util.Identifier;
 import iafenvoy.MCDeamon4J.Util.Interface.CommandCallback;
 import iafenvoy.MCDeamon4J.Util.Interface.PlayerEvent;

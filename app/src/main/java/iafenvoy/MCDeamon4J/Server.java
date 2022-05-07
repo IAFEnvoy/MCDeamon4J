@@ -8,8 +8,11 @@ import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 import iafenvoy.MCDeamon4J.Logger.Logger;
+import iafenvoy.MCDeamon4J.Plugin.EventRunner.ServerEventRunner;
 
 public class Server {
+  static String serverStartPrefix = "[Server thread/INFO]: Done";
+
   public static void runServer(ProcessBuilder builder) {
     Logger.info("Starting Server...");
     Scanner scanner = new Scanner(System.in);
@@ -34,8 +37,13 @@ public class Server {
         try {
           String outTemp = "", errTemp = "";
           while ((outTemp = readStdout.readLine()) != null || (errTemp = readStderr.readLine()) != null) {
-            if (outTemp != null && outTemp != "")
+            if (outTemp != null && outTemp != "") {
               Logger.log(outTemp);
+              if (outTemp.contains(serverStartPrefix)) {
+                Logger.info("Server started.");
+                ServerEventRunner.onStartServer();
+              }
+            }
             if (errTemp != null && errTemp != "")
               Logger.log(errTemp);
           }
@@ -48,6 +56,7 @@ public class Server {
           } catch (IOException e1) {
           }
           Logger.error("Stopping Server");
+          ServerEventRunner.onStopServer();
           // TODO: save all config
           return;
         }
@@ -71,6 +80,7 @@ public class Server {
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
+        ServerEventRunner.onStopServer();
         Logger.info("Succeeded stopping server.");
       } else {
         try {

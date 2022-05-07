@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import iafenvoy.MCDeamon4J.Logger.Logger;
-import iafenvoy.MCDeamon4J.Registry.Registry;
 import iafenvoy.MCDeamon4J.Util.Exception.InvalidPluginException;
 import iafenvoy.MCDeamon4J.Util.Exception.NotAPluginFileException;
 

@@ -5,6 +5,7 @@ import java.io.File;
 import iafenvoy.MCDeamon4J.Config.Config;
 import iafenvoy.MCDeamon4J.Logger.Logger;
 import iafenvoy.MCDeamon4J.Plugin.PluginLoader;
+import iafenvoy.MCDeamon4J.Plugin.Registry;
 import iafenvoy.MCDeamon4J.Util.KeyBoardInput;
 
 public class Main {
@@ -31,7 +32,7 @@ public class Main {
       Logger.warn("Plugin path not found, using default path.");
       pluginPath = "./plugins";
     }
-    File pluginFolder = new File(config.getValue("PluginFolder"));
+    File pluginFolder = new File(pluginPath);
     if (!pluginFolder.exists()) {
       Logger.warn("Plugin folder not found, create it.");
       pluginFolder.mkdirs();
@@ -41,7 +42,7 @@ public class Main {
     PluginLoader.loadPluginsConfig();
     Logger.info("Initializing plugins...");
     PluginLoader.initializePlugins();
-    Logger.info("Successfully load plugins.");
+    Logger.info("Successfully load " + Registry.plugins.size() + " plugins.");
 
     ProcessBuilder builder = new ProcessBuilder(startCommand.split(" "));
     // String serverPath = config.getValue("serverPath");
