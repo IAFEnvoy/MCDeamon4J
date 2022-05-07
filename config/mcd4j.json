@@ -1,0 +1,4 @@
+{
+  "serverPath":"C:\\Users\\allen\\Downloads\\1.16.5 fabric",
+  "startCommand":"java -Xmx2G -jar fabric-server-launch.jar nogui"
+}

@@ -9,9 +9,6 @@ import iafenvoy.MCDeamon4J.Plugin.Registry;
 import iafenvoy.MCDeamon4J.Util.KeyBoardInput;
 
 public class Main {
-  static String startCommand = "java -Xmx2G -jar fabric-server-launch.jar nogui";
-  static String serverPath = "C:\\Users\\allen\\Downloads\\1.16.5 fabric";
-
   public static void main(String[] args) {
     KeyBoardInput.startListen();
     Logger.info("Start loading Minecraft Deamon For Java");
@@ -44,17 +41,23 @@ public class Main {
     PluginLoader.initializePlugins();
     Logger.info("Successfully load " + Registry.plugins.size() + " plugins.");
 
+    // start server
+    String startCommand = config.getValue("startCommand");
+    if (startCommand == null) {
+      Logger.error("Start command not found, stop loading.");
+      Runtime.getRuntime().exit(1);
+    }
     ProcessBuilder builder = new ProcessBuilder(startCommand.split(" "));
-    // String serverPath = config.getValue("serverPath");
-    // if (serverPath == null)
-    // serverPath = "./server/";
+    String serverPath = config.getValue("serverPath");
+    if (serverPath == null)
+      serverPath = "./server/";
     builder.directory(new File(serverPath));
     Logger.info("Redirect server path to " + serverPath);
     builder.redirectErrorStream(false);
 
-    Logger.info("Server will start in 5 seconds...");
+    Logger.info("Server will start in 10 seconds...");
     try {
-      Thread.sleep(5000);
+      Thread.sleep(10000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
